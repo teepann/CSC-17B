@@ -1,6 +1,6 @@
 #include <cstdlib>  //Random Library
 #include <ctime>    //Time Library
-#include <string> // String Library
+#include <sstream> //String Stream Library
 
 using namespace std;//Utilize standard name-space directly
 
@@ -82,25 +82,18 @@ public:
 
     /*This function returns a string with the contents of the array in character array format*/
     char* toString(){
-        char result[5*nRows*nCols];
-        string tmpstr;
 
+        stringstream result;
 
-        char tmp[2];
-
-        //Creating a string of all the array elements
+        //Creating a string stream of all the array elements
         for (int i = 0; i < nRows; i++){
             for (int j = 0; j < nCols; j++){
-
-                sprintf(tmp,"%d",array[i][j]);
-                tmpstr.push_back(tmp[0]);
-                tmpstr.push_back(tmp[1]);
+                result << array[i][j] << " ";
             }
+            result << endl;
         }
 
-        strcpy(result, tmpstr.c_str());
-        return result;
-
+        return (char*)result.str().c_str();
     }
 
 };

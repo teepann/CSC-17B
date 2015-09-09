@@ -16,4 +16,4 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    tdarray.cpp
+    array.cpp
