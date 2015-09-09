@@ -43,25 +43,28 @@ public:
 
         //Row and Col validation
         if (nRows <= ROW_COL_INVALID_VALUE || nCols <= ROW_COL_INVALID_VALUE){
-            return;
-        }
 
-        //Assigning private properties of the array
-        this->nRows = nRows;
-        this->nCols = nCols;
+            this->nRows = this->nCols = ROW_COL_DEFAULT;
+
+        }else{
+
+            //Assigning private properties of the array
+            this->nRows = nRows;
+            this->nCols = nCols;
+        }
 
         //Set random number seed with respect to time.
         srand(static_cast<unsigned int>(time(NULL)));
 
         //Allocating the memory for the 2D Array
-        array = new int* [nRows];
-        for (int i = 0; i < nRows; i++) {
-            array[i] = new int [nCols];
+        array = new int* [this->nRows];
+        for (int i = 0; i < this->nRows; i++) {
+            array[i] = new int [this->nCols];
         }
 
         // Fill the array with random 2 digit numbers.
-        for (int i = 0; i < nRows; i++){
-            for (int j = 0; j < nCols; j++){
+        for (int i = 0; i < this->nRows; i++){
+            for (int j = 0; j < this->nCols; j++){
                 array[i][j] = ((rand() % (MIN_3_DIGIT_NUMBER - MIN_2_DIGIT_NUMBER)) + MIN_2_DIGIT_NUMBER);
             }
         }

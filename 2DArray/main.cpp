@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     //The number of rows or cols in a array
-    const int ROW_COL_TEST_VALUE = 5;
+    const int ROW_COL_TEST_VALUE = 8;
 
     QApplication a(argc, argv);
 
