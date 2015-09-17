@@ -5,9 +5,8 @@
 #include <ctime>    //Time Library
 #include <sstream> //String Stream Library
 #include <iostream> // Input/Output Stream Library
+#include <iomanip> // Input/Output Manipulation Library
 #include "abstractarray.cpp" //AbstractArray class
-
-#include <iomanip>
 
 using namespace std;//Utilize standard name-space directly
 
