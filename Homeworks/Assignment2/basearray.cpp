@@ -7,6 +7,8 @@
 #include <iostream> // Input/Output Stream Library
 #include "abstractarray.cpp" //AbstractArray class
 
+#include <iomanip>
+
 using namespace std;//Utilize standard name-space directly
 
 template <class T> //Template is used for supporting integer and float arrays
@@ -87,7 +89,7 @@ private:
         //Creating a string stream of all the array elements
         for (int i = 0; i < nRows; i++){
             for (int j = 0; j < nCols; j++){
-                result << array[i][j] << " ";
+                result << fixed << setprecision(1) << array[i][j] << " ";
             }
             result << endl;
         }

@@ -8,10 +8,10 @@ class FloatArray: public BaseArray<float>{
 private:
 
     /*The minimum value of a 2 digit number*/
-    static const float MIN_2_DIGIT_NUMBER = 10.0;
+    static const float MIN_2_DIGIT_NUMBER = 0.0;
 
     /*The minimum value of a 3 digit number*/
-    static const float MAX_2_DIGIT_NUMBER = 99.0;
+    static const float MAX_2_DIGIT_NUMBER = 9.0;
 
 
 public:
@@ -41,7 +41,7 @@ public:
         for (int i = 0; i < this->nRows; i++){
             for (int j = 0; j < this->nCols; j++){
                 array[i][j] = MIN_2_DIGIT_NUMBER
-                        + (static_cast <float> (rand())) /( static_cast <float> (RAND_MAX / (MAX_2_DIGIT_NUMBER-MIN_2_DIGIT_NUMBER) ) );
+                        + (rand() / static_cast<float> (RAND_MAX) ) * (MAX_2_DIGIT_NUMBER - MIN_2_DIGIT_NUMBER);
             }
         }
 
