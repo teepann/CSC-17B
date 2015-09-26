@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>Images/BackGround.png</file>
+        <file>Images/DownwardFlower.png</file>
+        <file>Images/UpwardFlower.png</file>
     </qresource>
 </RCC>
