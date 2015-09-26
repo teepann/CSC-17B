@@ -1,5 +1,4 @@
 #include "mainscene.h"
-#include <QDebug>
 
 /**
  * Reference to the declaration of this constructor
@@ -8,6 +7,7 @@
  */
 MainScene::MainScene(QObject *parent) : QGraphicsScene(parent)
 {
+
     /*Loading a background picture into the equivalent image object*/
     bgImage.load(BG_FILE_NAME);
 
@@ -20,15 +20,6 @@ MainScene::MainScene(QObject *parent) : QGraphicsScene(parent)
 }
 
 /**
- * Destructor
- * @brief MainScene::~MainScene
- */
-MainScene::~MainScene()
-{
-
-}
-
-/**
  * Reference to the declaration of this function
  * @brief MainScene::drawBackground
  * @param painter
@@ -37,7 +28,6 @@ MainScene::~MainScene()
 void MainScene::drawBackground(QPainter *painter, const QRectF &rect)
 {
     painter->drawImage(rect,bgImage);
-
 }
 
 /**
@@ -48,18 +38,19 @@ void MainScene::createFlowers()
 {
     static int i = 0;
 
-    qDebug() << "createFlowers was called";
+    flowerProducer = new QGraphicsPixmapItem(QPixmap::fromImage(upFlowerIm.scaledToHeight(150)));
 
-    flowerProducer = new QGraphicsPixmapItem(QPixmap::fromImage(upFlowerIm));
+    flowerProducer->setPos(sceneRect().bottomRight().x() - i - flowerProducer->sceneBoundingRect().width(), sceneRect().bottom() - flowerProducer->sceneBoundingRect().height());
+
+    this->addItem(flowerProducer);
+
+    flowerProducer = new QGraphicsPixmapItem(QPixmap::fromImage(downFlowerIm.scaledToHeight(150)));
+
+    flowerProducer->setPos(sceneRect().topRight().x() - i - flowerProducer->sceneBoundingRect().width(), sceneRect().top());
 
     this->addItem(flowerProducer);
 
-    flowerProducer = new QGraphicsPixmapItem(QPixmap::fromImage(downFlowerIm));
-
-    i+=10;
-    flowerProducer->setPos(flowerProducer->mapToParent(i, 100));
-
-    this->addItem(flowerProducer);
+    i+=100;
 
 }
 

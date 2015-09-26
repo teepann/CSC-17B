@@ -11,6 +11,7 @@ UIController::UIController(QObject *parent) : QObject(parent)
     connect(flowerTimer,SIGNAL(timeout()),mainWindow,SLOT(createFlowers()));
     flowerTimer->start(1000);
 
+
 }
 
 

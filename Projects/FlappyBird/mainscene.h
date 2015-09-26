@@ -44,11 +44,6 @@ public:
      */
     MainScene(QObject *parent = 0);
 
-    /**
-     * Destructor
-     */
-    ~MainScene();
-
 protected:
     /**
      * Overriding function from QGraphicsScene
