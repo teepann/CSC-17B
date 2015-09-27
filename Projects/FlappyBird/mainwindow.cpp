@@ -22,8 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->graphicsView->setScene(mainScene);
 
-
-
 }
 
 /*Reference to the function declaration*/

@@ -5,6 +5,8 @@
 #include <QtGui>
 #include <QGraphicsPixmapItem>
 #include <ctime>
+#include <QLabel>
+#include <QGraphicsProxyWidget>
 
 /**
  * @brief The MainScene class
@@ -25,11 +27,17 @@ private:
     /*Path to the downward flower image*/
     const QString DF_FILE_NAME = ":/Images/DownwardFlower.png";
 
+    /*Path to the flappig bird image*/
+    const QString FB_FILE_NAME = ":/Images/FlappingBird.gif";
+
     /*The minimum height of a flower in the scene*/
     const short MIN_FLOWER_HEIGHT = 130;
 
     /*The maximum height of a flower in the scene*/
     const short MAX_FLOWER_HEIGHT = 160;
+
+    /*This scalar of the flapping bird in the scene*/
+    const float BIRD_PIC_SCALE = 0.125;
 
     /*The Background Image Object*/
     QImage bgImage;
@@ -40,12 +48,17 @@ private:
     /*The Downward Flower Image Object*/
     QImage downFlowerIm;
 
-    /*This object help to create flowers in the scene*/
+    /*The Flapping Bird Image Object*/
+    QImage birdImage;
+
+    /*This object helps to create flowers in the scene*/
     QGraphicsPixmapItem *flower;
 
     /*A vetors of all available flowers in the scene*/
     QVector<QGraphicsPixmapItem *> flowers;
 
+    /*This graphics proxy object is used for managing the bird in the main scene*/
+    QGraphicsProxyWidget *bird;
 
 public:
 
@@ -73,6 +86,9 @@ private:
 
     /*Deleting the flower that passed the scence*/
     void deletePFlower(QGraphicsPixmapItem *flower);
+
+    /*Creating a bird and putting it on the main scene*/
+    void createABird();
 
 signals:
 

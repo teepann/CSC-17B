@@ -1,12 +1,16 @@
 #include "mainscene.h"
 
+
 /**
  * Reference to the declaration of this constructor
  * @brief MainScene::MainScene
- * @param parent
+ * @param paren
  */
 MainScene::MainScene(QObject *parent) : QGraphicsScene(parent)
 {
+
+    /*Seeding the value for a random*/
+    qsrand(time(NULL));
 
     /*Loading a background picture into the equivalent image object*/
     bgImage.load(BG_FILE_NAME);
@@ -17,8 +21,10 @@ MainScene::MainScene(QObject *parent) : QGraphicsScene(parent)
     /*Loading a bottom flower picture into the equivalent image object*/
     downFlowerIm.load(DF_FILE_NAME);
 
-    qsrand(time(NULL));
+    /*Loading a bird picture into the equivalent image object*/
+    birdImage.load(FB_FILE_NAME);
 
+    createABird();
 }
 
 /**
@@ -64,6 +70,29 @@ void MainScene::deletePFlower(QGraphicsPixmapItem *flower)
         this->removeItem(flower);
         flowers.removeOne(flower);
     }
+}
+
+
+/**
+ * Reference to the declaration of this function
+ * @brief MainScene::createABird
+ */
+void MainScene::createABird()
+{
+    //Loading animated bird gif to a label
+    QMovie *birdMovie = new QMovie(FB_FILE_NAME);
+    QLabel *birdLabel = new QLabel();
+    birdLabel->setMovie(birdMovie);
+
+    //Make the gif look transparent on the main scene
+    birdLabel->setAttribute(Qt::WA_TranslucentBackground,true);
+    birdMovie->start();
+
+    //Using a graphics proxy object to manage the bird in the main scene
+    bird = addWidget(birdLabel);
+    bird->setScale(0.125);
+    bird->setPos(sceneRect().bottomLeft().x() + bird->sceneBoundingRect().width()
+                 ,bird->sceneBoundingRect().height());
 }
 
 /**

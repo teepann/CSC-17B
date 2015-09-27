@@ -9,6 +9,7 @@ UIController::UIController(QObject *parent) : QObject(parent)
     mainWindow = new MainWindow();
     mainWindow->show();
 
+    //Seeding the value for a random
     qsrand(time(NULL));
 
     //Initializing all the timers
@@ -16,13 +17,24 @@ UIController::UIController(QObject *parent) : QObject(parent)
     mFlowerTimer = new QTimer(this);
 
     //Connecting timer to the behaviors of flowers in the main scene
-    connect(cFlowerTimer,SIGNAL(timeout()),mainWindow,SLOT(createFlowers()));
+    connect(cFlowerTimer,SIGNAL(timeout()),this,SLOT(createFlowers()));
     connect(mFlowerTimer,SIGNAL(timeout()),mainWindow,SLOT(moveFlowers()));
 
     //Testing
-    cFlowerTimer->start(1000 + qrand()%(5000 - 1000 + 1));
-    mFlowerTimer->start(15);
+    cFlowerTimer->start(MIN_TIME_IN_MIL);
+    mFlowerTimer->start(FLOWER_DEFAULT_SPEED);
 
+}
+
+/**
+ * Reference to the function declaration
+ * @brief UIController::createNewFLowers
+ */
+void UIController::createFlowers()
+{
+    cFlowerTimer->stop();
+    mainWindow->createFlowers();
+    cFlowerTimer->start(MIN_TIME_IN_MIL + (qrand()%(MAX_TIME_IN_MIL - MIN_TIME_IN_MIL + 1)));
 }
 
 

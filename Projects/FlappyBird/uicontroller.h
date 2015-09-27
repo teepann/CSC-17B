@@ -16,6 +16,15 @@ class UIController : public QObject
 
 private:
 
+    /*The minimum milisecond for creating flowers*/
+    const int MIN_TIME_IN_MIL = 1000;
+
+    /*The maximum milisecond for creating flowers*/
+    const int MAX_TIME_IN_MIL = 3000;
+
+    /*The default milisecond for moving flowers*/
+    const int FLOWER_DEFAULT_SPEED = 15;
+
     /*The main window of Flappy Bird*/
     MainWindow *mainWindow;
 
@@ -32,6 +41,9 @@ public:
 signals:
 
 public slots:
+
+    /*Randomly ask for new flowers to add to the main scene*/
+    void createFlowers();
 
 };
 
