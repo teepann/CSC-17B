@@ -33,8 +33,8 @@ public slots:
     /*This function asks main scene to create new flowers when the GUI thread is running*/
     void createFlowers();
 
-    /*This function asks main scene to delete passed flowers when the GUI thread is running*/
-    void deleteFlowers();
+    /*This function asks main scene to move flowers when the GUI thread is running*/
+    void moveFlowers();
 
 };
 

@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QtGui>
 #include <QGraphicsPixmapItem>
+#include <ctime>
 
 /**
  * @brief The MainScene class
@@ -24,6 +25,12 @@ private:
     /*Path to the downward flower image*/
     const QString DF_FILE_NAME = ":/Images/DownwardFlower.png";
 
+    /*The minimum height of a flower in the scene*/
+    const short MIN_FLOWER_HEIGHT = 130;
+
+    /*The maximum height of a flower in the scene*/
+    const short MAX_FLOWER_HEIGHT = 160;
+
     /*The Background Image Object*/
     QImage bgImage;
 
@@ -34,7 +41,10 @@ private:
     QImage downFlowerIm;
 
     /*This object help to create flowers in the scene*/
-    QGraphicsPixmapItem *flowerProducer;
+    QGraphicsPixmapItem *flower;
+
+    /*A vetors of all available flowers in the scene*/
+    QVector<QGraphicsPixmapItem *> flowers;
 
 
 public:
@@ -54,6 +64,16 @@ protected:
      */
     void drawBackground(QPainter *painter, const QRectF &rect);
 
+private:
+    /*Generate a scale for the height of a flower in a reasonable range*/
+    short getHeightScale();
+
+    /*Update lists of flowers for processing theirs movements*/
+    void addNewFlower(QGraphicsPixmapItem *flower);
+
+    /*Deleting the flower that passed the scence*/
+    void deletePFlower(QGraphicsPixmapItem *flower);
+
 signals:
 
 
@@ -62,8 +82,9 @@ public slots:
     /*Add moving flowers to the scene*/
     void createFlowers();
 
-    /*Free memory for the unused flowers */
-    void deleteFlowers();
+    /*Move flowers to the scene*/
+    void moveFlowers();
+
 };
 
 #endif // MAINSCENE_H

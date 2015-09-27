@@ -41,9 +41,11 @@ void MainWindow::createFlowers()
 }
 
 /*Reference to the function declaration*/
-void MainWindow::deleteFlowers()
+void MainWindow::moveFlowers()
 {
-    mainScene->deleteFlowers();
+    mainScene->moveFlowers();
+    //Make scene look smooth
+    mainScene->update();
 }
 
 
