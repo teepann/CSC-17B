@@ -31,13 +31,13 @@ private:
     const QString FB_FILE_NAME = ":/Images/FlappingBird.gif";
 
     /*The minimum height of a flower in the scene*/
-    const short MIN_FLOWER_HEIGHT = 130;
+    const short MIN_FLOWER_HEIGHT = 150;
 
     /*The maximum height of a flower in the scene*/
-    const short MAX_FLOWER_HEIGHT = 160;
+    const short MAX_FLOWER_HEIGHT = 200;
 
     /*This scalar of the flapping bird in the scene*/
-    const float BIRD_PIC_SCALE = 0.125;
+    const float BIRD_PIC_SCALE = 0.2;
 
     /*The Background Image Object*/
     QImage bgImage;
@@ -95,11 +95,15 @@ signals:
 
 public slots:
 
+public:
     /*Add moving flowers to the scene*/
     void createFlowers();
 
     /*Move flowers to the scene*/
     void moveFlowers();
+
+    /*Locate the bird to start the game*/
+    void play();
 
 };
 

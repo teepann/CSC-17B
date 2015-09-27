@@ -31,11 +31,26 @@ MainWindow::~MainWindow()
 }
 
 /*Reference to the function declaration*/
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    //Check if the space bar was pressed
+    if (event->key() == Qt::Key_Space){
+        emit pressSpaceKey();
+    }
+}
+
+/*Reference to the function declaration*/
 void MainWindow::createFlowers()
 {
     mainScene->createFlowers();
     //Make scene look smooth
     mainScene->update();
+}
+
+/*Reference to the function declaration*/
+void MainWindow::play()
+{
+    mainScene->play();
 }
 
 /*Reference to the function declaration*/

@@ -17,10 +17,10 @@ class UIController : public QObject
 private:
 
     /*The minimum milisecond for creating flowers*/
-    const int MIN_TIME_IN_MIL = 1000;
+    const int MIN_TIME_IN_MIL = 1500;
 
     /*The maximum milisecond for creating flowers*/
-    const int MAX_TIME_IN_MIL = 3000;
+    const int MAX_TIME_IN_MIL = 5000;
 
     /*The default milisecond for moving flowers*/
     const int FLOWER_DEFAULT_SPEED = 15;
@@ -34,6 +34,9 @@ private:
     /*This timer is used for controlling the movement of flowers*/
     QTimer *mFlowerTimer;
 
+    /*Identifying the current game mode*/
+    bool isGameStarted;
+
 public:
     /*The constructor of this main UI controller*/
     explicit UIController(QObject *parent = 0);
@@ -45,6 +48,8 @@ public slots:
     /*Randomly ask for new flowers to add to the main scene*/
     void createFlowers();
 
+    /*Processing the items in the scene according to the key press*/
+    void processKeyPress();
 };
 
 #endif // UICONTROLLER_H

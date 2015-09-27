@@ -1,5 +1,5 @@
 #include "mainscene.h"
-
+#include "mainwindow.h"
 
 /**
  * Reference to the declaration of this constructor
@@ -82,6 +82,10 @@ void MainScene::createABird()
     //Loading animated bird gif to a label
     QMovie *birdMovie = new QMovie(FB_FILE_NAME);
     QLabel *birdLabel = new QLabel();
+
+    //Let the bird image occupy the whole scene at the beginning
+    birdMovie->setScaledSize((QSize(static_cast<MainWindow*>(this->parent())->geometry().width()
+                                    ,static_cast<MainWindow*>(this->parent())->geometry().height())));
     birdLabel->setMovie(birdMovie);
 
     //Make the gif look transparent on the main scene
@@ -90,9 +94,7 @@ void MainScene::createABird()
 
     //Using a graphics proxy object to manage the bird in the main scene
     bird = addWidget(birdLabel);
-    bird->setScale(0.125);
-    bird->setPos(sceneRect().bottomLeft().x() + bird->sceneBoundingRect().width()
-                 ,bird->sceneBoundingRect().height());
+
 }
 
 /**
@@ -132,4 +134,16 @@ void MainScene::moveFlowers()
         deletePFlower(flowers[i]);
     }
 
+}
+
+/**
+ * Reference to the declaration of this function
+ * @brief MainScene::play
+ */
+void MainScene::play()
+{
+    bird->setScale(BIRD_PIC_SCALE);
+    qDebug() << bird->geometry().width()*BIRD_PIC_SCALE<< endl;
+    qDebug() << bird->geometry().height()*BIRD_PIC_SCALE;
+    bird->setPos(100,250);
 }

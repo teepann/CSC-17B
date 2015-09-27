@@ -30,20 +30,20 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(745, 358);
-        MainWindow->setMaximumSize(QSize(745, 358));
+        MainWindow->resize(520, 520);
+        MainWindow->setMaximumSize(QSize(745, 700));
         MainWindow->setWindowOpacity(1);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         graphicsView = new QGraphicsView(centralWidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setGeometry(QRect(9, 9, 727, 340));
+        graphicsView->setGeometry(QRect(9, 9, 500, 500));
         QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(graphicsView->sizePolicy().hasHeightForWidth());
         graphicsView->setSizePolicy(sizePolicy);
-        graphicsView->setMaximumSize(QSize(727, 340));
+        graphicsView->setMaximumSize(QSize(727, 690));
         graphicsView->viewport()->setProperty("cursor", QVariant(QCursor(Qt::CrossCursor)));
         graphicsView->setMouseTracking(false);
         graphicsView->setAcceptDrops(false);

@@ -6,6 +6,7 @@
  */
 UIController::UIController(QObject *parent) : QObject(parent)
 {
+    //Initialize the main window with its components
     mainWindow = new MainWindow();
     mainWindow->show();
 
@@ -20,10 +21,11 @@ UIController::UIController(QObject *parent) : QObject(parent)
     connect(cFlowerTimer,SIGNAL(timeout()),this,SLOT(createFlowers()));
     connect(mFlowerTimer,SIGNAL(timeout()),mainWindow,SLOT(moveFlowers()));
 
-    //Testing
-    cFlowerTimer->start(MIN_TIME_IN_MIL);
-    mFlowerTimer->start(FLOWER_DEFAULT_SPEED);
+    //Getting connect to the key event of the main window
+    connect(mainWindow,SIGNAL(pressSpaceKey()),this,SLOT(processKeyPress()));
 
+    //Waiting for a user to start the game
+    isGameStarted = false;
 }
 
 /**
@@ -32,9 +34,33 @@ UIController::UIController(QObject *parent) : QObject(parent)
  */
 void UIController::createFlowers()
 {
+    //Randomize the time for creating new flowers
     cFlowerTimer->stop();
     mainWindow->createFlowers();
     cFlowerTimer->start(MIN_TIME_IN_MIL + (qrand()%(MAX_TIME_IN_MIL - MIN_TIME_IN_MIL + 1)));
+}
+
+/**
+ * Reference to the function declaration
+ * @brief UIController::processKeyPress
+ */
+void UIController::processKeyPress()
+{
+    if (!isGameStarted){ //Starting the game at the first time
+
+        isGameStarted = true;
+
+        //Let flowers appear and move in the scene
+        cFlowerTimer->start(MIN_TIME_IN_MIL);
+        mFlowerTimer->start(FLOWER_DEFAULT_SPEED);
+
+        //Put the bird in the right position to start the game
+        mainWindow->play();
+
+    }else { //Processing the bird movements
+
+    }
+
 }
 
 
