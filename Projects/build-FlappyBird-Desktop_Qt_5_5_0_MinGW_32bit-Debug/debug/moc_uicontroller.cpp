@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_UIController_t {
     QByteArrayData data[4];
-    char stringdata0[44];
+    char stringdata0[49];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,10 +32,11 @@ static const qt_meta_stringdata_UIController_t qt_meta_stringdata_UIController =
 QT_MOC_LITERAL(0, 0, 12), // "UIController"
 QT_MOC_LITERAL(1, 13, 13), // "createFlowers"
 QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 15) // "processKeyPress"
+QT_MOC_LITERAL(3, 28, 20) // "processSpaceKeyPress"
 
     },
-    "UIController\0createFlowers\0\0processKeyPress"
+    "UIController\0createFlowers\0\0"
+    "processSpaceKeyPress"
 };
 #undef QT_MOC_LITERAL
 
@@ -70,7 +71,7 @@ void UIController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->createFlowers(); break;
-        case 1: _t->processKeyPress(); break;
+        case 1: _t->processSpaceKeyPress(); break;
         default: ;
         }
     }

@@ -16,13 +16,17 @@ UIController::UIController(QObject *parent) : QObject(parent)
     //Initializing all the timers
     cFlowerTimer = new QTimer(this);
     mFlowerTimer = new QTimer(this);
+    gBirdTimer = new QTimer(this);
 
     //Connecting timer to the behaviors of flowers in the main scene
     connect(cFlowerTimer,SIGNAL(timeout()),this,SLOT(createFlowers()));
     connect(mFlowerTimer,SIGNAL(timeout()),mainWindow,SLOT(moveFlowers()));
 
+    //Connecting timer to the behaviors of the bird
+    connect(gBirdTimer,SIGNAL(timeout()),mainWindow,SLOT(freeFallBird()));
+
     //Getting connect to the key event of the main window
-    connect(mainWindow,SIGNAL(pressSpaceKey()),this,SLOT(processKeyPress()));
+    connect(mainWindow,SIGNAL(pressSpaceKey()),this,SLOT(processSpaceKeyPress()));
 
     //Waiting for a user to start the game
     isGameStarted = false;
@@ -44,7 +48,7 @@ void UIController::createFlowers()
  * Reference to the function declaration
  * @brief UIController::processKeyPress
  */
-void UIController::processKeyPress()
+void UIController::processSpaceKeyPress()
 {
     if (!isGameStarted){ //Starting the game at the first time
 
@@ -54,11 +58,20 @@ void UIController::processKeyPress()
         cFlowerTimer->start(MIN_TIME_IN_MIL);
         mFlowerTimer->start(FLOWER_DEFAULT_SPEED);
 
+        //Let the bird free fall
+        gBirdTimer->start(BIRD_FALLING_SPEED);
+
         //Put the bird in the right position to start the game
         mainWindow->play();
 
     }else { //Processing the bird movements
 
+        //Stop free-fall for fly-up
+        gBirdTimer->stop();
+        mainWindow->flyUpBird();
+
+        //Start free-fall again
+        gBirdTimer->start(BIRD_FALLING_SPEED);
     }
 
 }

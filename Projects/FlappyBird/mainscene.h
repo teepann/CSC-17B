@@ -39,6 +39,15 @@ private:
     /*This scalar of the flapping bird in the scene*/
     const float BIRD_PIC_SCALE = 0.2;
 
+    /*The angle of the falling bird */
+    const qreal FREE_FALL_ANGLE = 90;
+
+    /*The height that the bird will fall down after a certain period of time*/
+    const qreal FREE_FALL_DIST= 10;
+
+    /*The height that the bird will fly up after a key-press*/
+    const qreal FLY_UP_DIST= 30;
+
     /*The Background Image Object*/
     QImage bgImage;
 
@@ -59,6 +68,12 @@ private:
 
     /*This graphics proxy object is used for managing the bird in the main scene*/
     QGraphicsProxyWidget *bird;
+
+    /*Check if the bird is in the free-fall mode*/
+    bool isFreeFall;
+
+    /*Check if the bird is in the fly-up mode*/
+    bool isFlyUp;
 
 public:
 
@@ -88,7 +103,7 @@ private:
     void deletePFlower(QGraphicsPixmapItem *flower);
 
     /*Creating a bird and putting it on the main scene*/
-    void createABird();
+    void createABird(const QSize& birdSize);
 
 signals:
 
@@ -104,6 +119,12 @@ public:
 
     /*Locate the bird to start the game*/
     void play();
+
+    /*Apply the gravity on the bird*/
+    void freeFallBird();
+
+    /*User controls the bird to fly up*/
+    void flyUpBird();
 
 };
 

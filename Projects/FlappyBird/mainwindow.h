@@ -41,6 +41,9 @@ public slots:
     /*This function asks main scene to move flowers when the GUI thread is running*/
     void moveFlowers();
 
+    /*This function asks main scene to apply the gravity on the bird when the GUI thread is running*/
+    void freeFallBird();
+
 public:
 
     /*This function asks main scene to create new flowers when the GUI thread is running*/
@@ -49,6 +52,8 @@ public:
     /*This function asks main scene to start the game when the GUI thread is running*/
     void play();
 
+     /*This function asks main scene to let the bird fly-up when the GUI thread is running*/
+    void flyUpBird();
 };
 
 #endif // MAINWINDOW_H

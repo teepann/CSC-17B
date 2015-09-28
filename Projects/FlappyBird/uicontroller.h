@@ -16,14 +16,17 @@ class UIController : public QObject
 
 private:
 
-    /*The minimum milisecond for creating flowers*/
+    /*The minimum miliseconds for creating flowers*/
     const int MIN_TIME_IN_MIL = 1500;
 
-    /*The maximum milisecond for creating flowers*/
+    /*The maximum miliseconds for creating flowers*/
     const int MAX_TIME_IN_MIL = 5000;
 
-    /*The default milisecond for moving flowers*/
+    /*The default miliseconds for moving flowers*/
     const int FLOWER_DEFAULT_SPEED = 15;
+
+    /*The default miliseconds for the bird fall down*/
+    const int BIRD_FALLING_SPEED = 150;
 
     /*The main window of Flappy Bird*/
     MainWindow *mainWindow;
@@ -33,6 +36,9 @@ private:
 
     /*This timer is used for controlling the movement of flowers*/
     QTimer *mFlowerTimer;
+
+    /*This timer is used for controlling the gravity on the bird*/
+    QTimer *gBirdTimer;
 
     /*Identifying the current game mode*/
     bool isGameStarted;
@@ -49,7 +55,7 @@ public slots:
     void createFlowers();
 
     /*Processing the items in the scene according to the key press*/
-    void processKeyPress();
+    void processSpaceKeyPress();
 };
 
 #endif // UICONTROLLER_H

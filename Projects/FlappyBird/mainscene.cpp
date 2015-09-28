@@ -24,7 +24,13 @@ MainScene::MainScene(QObject *parent) : QGraphicsScene(parent)
     /*Loading a bird picture into the equivalent image object*/
     birdImage.load(FB_FILE_NAME);
 
-    createABird();
+    /*Creating a huge bird before the game is started*/
+    createABird(QSize(static_cast<MainWindow*>(this->parent())->geometry().width()
+                      ,static_cast<MainWindow*>(this->parent())->geometry().height()));
+
+    /*At first the bird is not in either free-fall or fly-up mode*/
+    isFreeFall = false;
+    isFlyUp = false;
 }
 
 /**
@@ -77,15 +83,14 @@ void MainScene::deletePFlower(QGraphicsPixmapItem *flower)
  * Reference to the declaration of this function
  * @brief MainScene::createABird
  */
-void MainScene::createABird()
+void MainScene::createABird(const QSize& birdSize)
 {
     //Loading animated bird gif to a label
     QMovie *birdMovie = new QMovie(FB_FILE_NAME);
     QLabel *birdLabel = new QLabel();
 
     //Let the bird image occupy the whole scene at the beginning
-    birdMovie->setScaledSize((QSize(static_cast<MainWindow*>(this->parent())->geometry().width()
-                                    ,static_cast<MainWindow*>(this->parent())->geometry().height())));
+    birdMovie->setScaledSize(birdSize);
     birdLabel->setMovie(birdMovie);
 
     //Make the gif look transparent on the main scene
@@ -142,8 +147,58 @@ void MainScene::moveFlowers()
  */
 void MainScene::play()
 {
-    bird->setScale(BIRD_PIC_SCALE);
-    qDebug() << bird->geometry().width()*BIRD_PIC_SCALE<< endl;
-    qDebug() << bird->geometry().height()*BIRD_PIC_SCALE;
-    bird->setPos(100,250);
+    //Creating a small bird after deleting the old huge one
+    removeItem(bird);
+    createABird(QSize(bird->geometry().width()*BIRD_PIC_SCALE
+                      ,bird->geometry().height()*BIRD_PIC_SCALE));
+
+    bird->setPos(sceneRect().bottomLeft().x() + bird->geometry().width()
+                 ,sceneRect().center().y());
+}
+
+/**
+ * Reference to the declaration of this function
+ * @brief MainScene::freeFallBird
+ */
+void MainScene::freeFallBird()
+{
+    isFlyUp = false;
+
+    if (!isFreeFall){ //Let the bird start falling down
+
+        bird->setRotation(FREE_FALL_ANGLE);
+        bird->setPos(bird->pos().x() + bird->geometry().width()
+                     ,bird->pos().y());
+
+        isFreeFall = true;
+
+    }else{// In the free-fall mode
+        bird->setPos(bird->pos().x(),bird->pos().y() + FREE_FALL_DIST);
+    }
+
+}
+
+/**
+ * Reference to the declaration of this function
+ * @brief MainScene::flyUpBird
+ */
+void MainScene::flyUpBird()
+{
+    isFreeFall = false;
+
+    if (!isFlyUp){//Let the bird start flying up
+
+        bird->setRotation(0);
+        bird->setPos(bird->pos().x() - bird->geometry().width()
+                     ,bird->pos().y());
+
+        isFlyUp = true;
+
+    }else{// In the fly-up mode
+        bird->setPos(bird->pos().x(),bird->pos().y() - FREE_FALL_DIST);
+    }
+
+
+
+
 }
