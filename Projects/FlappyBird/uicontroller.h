@@ -26,7 +26,7 @@ private:
     const int FLOWER_DEFAULT_SPEED = 15;
 
     /*The default miliseconds for the bird fall down*/
-    const int BIRD_FALLING_SPEED = 150;
+    const int BIRD_FALLING_SPEED = 200;
 
     /*The main window of Flappy Bird*/
     MainWindow *mainWindow;
@@ -56,6 +56,9 @@ public slots:
 
     /*Processing the items in the scene according to the key press*/
     void processSpaceKeyPress();
+
+    /*This function is called when the bird collides with a flower*/
+    void processCollision();
 };
 
 #endif // UICONTROLLER_H

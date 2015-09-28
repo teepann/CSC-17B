@@ -43,10 +43,10 @@ private:
     const qreal FREE_FALL_ANGLE = 90;
 
     /*The height that the bird will fall down after a certain period of time*/
-    const qreal FREE_FALL_DIST= 10;
+    const qreal FREE_FALL_DIST= 30;
 
     /*The height that the bird will fly up after a key-press*/
-    const qreal FLY_UP_DIST= 30;
+    const qreal FLY_UP_DIST= 60;
 
     /*The Background Image Object*/
     QImage bgImage;
@@ -67,7 +67,7 @@ private:
     QVector<QGraphicsPixmapItem *> flowers;
 
     /*This graphics proxy object is used for managing the bird in the main scene*/
-    QGraphicsProxyWidget *bird;
+    QGraphicsProxyWidget *bird = NULL;
 
     /*Check if the bird is in the free-fall mode*/
     bool isFreeFall;
@@ -125,6 +125,12 @@ public:
 
     /*User controls the bird to fly up*/
     void flyUpBird();
+
+    /*Check for the collision between the bird and a flower*/
+    bool hasCollision();
+
+    /*This function will notify the main window in case of a collision happens*/
+    void checkForCollision();
 
 };
 

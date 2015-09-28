@@ -28,6 +28,9 @@ UIController::UIController(QObject *parent) : QObject(parent)
     //Getting connect to the key event of the main window
     connect(mainWindow,SIGNAL(pressSpaceKey()),this,SLOT(processSpaceKeyPress()));
 
+    //Getting a notify from the main window for a collision
+    connect(mainWindow,SIGNAL(processCollision()),this,SLOT(processCollision()));
+
     //Waiting for a user to start the game
     isGameStarted = false;
 }
@@ -74,6 +77,15 @@ void UIController::processSpaceKeyPress()
         gBirdTimer->start(BIRD_FALLING_SPEED);
     }
 
+}
+
+/**
+ * Reference to the function declaration
+ * @brief UIController::processCollision
+ */
+void UIController::processCollision()
+{
+    qDebug() << "Controller got the collision signal !";
 }
 
 

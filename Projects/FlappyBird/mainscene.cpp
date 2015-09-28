@@ -176,6 +176,7 @@ void MainScene::freeFallBird()
         bird->setPos(bird->pos().x(),bird->pos().y() + FREE_FALL_DIST);
     }
 
+    checkForCollision();
 }
 
 /**
@@ -198,7 +199,34 @@ void MainScene::flyUpBird()
         bird->setPos(bird->pos().x(),bird->pos().y() - FREE_FALL_DIST);
     }
 
+    checkForCollision();
+}
 
+/**
+ * Reference to the declaration of this function
+ * @brief MainScene::hasCollision
+ * @return
+ */
+bool MainScene::hasCollision()
+{
+    if (!flowers.isEmpty() && (bird != NULL)){
+        for (int i = 0; i < flowers.size(); i++) {
+            if (bird->collidesWithItem(flowers[i])){
+                return true;
+            }
+        }
+    }
 
+    return false;
+}
 
+/**
+ * Reference to the declaration of this function
+ * @brief MainScene::checkForCollision
+ */
+void MainScene::checkForCollision()
+{
+    if (hasCollision()){
+        emit static_cast<MainWindow*>(this->parent())->processCollision();
+    }
 }

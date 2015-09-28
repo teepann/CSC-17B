@@ -29,12 +29,17 @@ private:
     MainScene *mainScene;
 
 protected:
+
     /*This function waits for a key press event that belongs to the main window*/
     void keyPressEvent(QKeyEvent* event);
 
 signals:
+
     /*This function is called when the Space Bar key was pressed*/
     void pressSpaceKey();
+
+    /*This function is called when the bird collides with a flower*/
+    void processCollision();
 
 public slots:
 
