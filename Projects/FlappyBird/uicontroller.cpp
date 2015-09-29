@@ -85,7 +85,16 @@ void UIController::processSpaceKeyPress()
  */
 void UIController::processCollision()
 {
-    qDebug() << "Controller got the collision signal !";
+
+    //Stop creating and moving flowers
+    cFlowerTimer->stop();
+    mFlowerTimer->stop();
+
+    //Stop letting the bird fall down
+    gBirdTimer->stop();
+
+    //Stop handling key press events -> Stop fly up the bird
+    disconnect(mainWindow,SIGNAL(pressSpaceKey()),this,SLOT(processSpaceKeyPress()));
 }
 
 

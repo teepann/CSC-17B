@@ -66,6 +66,9 @@ private:
     /*A vetors of all available flowers in the scene*/
     QVector<QGraphicsPixmapItem *> flowers;
 
+    /*This object is used for controlling the flap of the bird*/
+    QMovie *birdMovie;
+
     /*This graphics proxy object is used for managing the bird in the main scene*/
     QGraphicsProxyWidget *bird = NULL;
 

@@ -86,7 +86,7 @@ void MainScene::deletePFlower(QGraphicsPixmapItem *flower)
 void MainScene::createABird(const QSize& birdSize)
 {
     //Loading animated bird gif to a label
-    QMovie *birdMovie = new QMovie(FB_FILE_NAME);
+    birdMovie = new QMovie(FB_FILE_NAME);
     QLabel *birdLabel = new QLabel();
 
     //Let the bird image occupy the whole scene at the beginning
@@ -124,6 +124,9 @@ void MainScene::createFlowers()
                    , sceneRect().top());
 
     addNewFlower(flower);
+
+    //Make scene look smooth
+    update();
 }
 
 /**
@@ -139,6 +142,8 @@ void MainScene::moveFlowers()
         deletePFlower(flowers[i]);
     }
 
+    //Make scene look smooth
+    update();
 }
 
 /**
@@ -166,6 +171,7 @@ void MainScene::freeFallBird()
 
     if (!isFreeFall){ //Let the bird start falling down
 
+        birdMovie->stop();
         bird->setRotation(FREE_FALL_ANGLE);
         bird->setPos(bird->pos().x() + bird->geometry().width()
                      ,bird->pos().y());
@@ -173,8 +179,19 @@ void MainScene::freeFallBird()
         isFreeFall = true;
 
     }else{// In the free-fall mode
-        bird->setPos(bird->pos().x(),bird->pos().y() + FREE_FALL_DIST);
+
+        //The bird should be always in the main scene
+        if (bird->pos().y() < (sceneRect().bottom() - bird->geometry().height())){
+            bird->setPos(bird->pos().x(),bird->pos().y() + FREE_FALL_DIST);
+
+        }else{// Game over when the bird hit the ground
+            emit static_cast<MainWindow*>(this->parent())->processCollision();
+        }
+
     }
+
+    //Make scene look smooth
+    update();
 
     checkForCollision();
 }
@@ -189,6 +206,7 @@ void MainScene::flyUpBird()
 
     if (!isFlyUp){//Let the bird start flying up
 
+        birdMovie->start();
         bird->setRotation(0);
         bird->setPos(bird->pos().x() - bird->geometry().width()
                      ,bird->pos().y());
@@ -196,8 +214,16 @@ void MainScene::flyUpBird()
         isFlyUp = true;
 
     }else{// In the fly-up mode
-        bird->setPos(bird->pos().x(),bird->pos().y() - FREE_FALL_DIST);
+
+        //Keep the bird in the main scene
+        if (bird->pos().y() > sceneRect().top() ){
+            bird->setPos(bird->pos().x(),bird->pos().y() - FREE_FALL_DIST);
+        }
+
     }
+
+    //Make scene look smooth
+    update();
 
     checkForCollision();
 }
@@ -227,6 +253,12 @@ bool MainScene::hasCollision()
 void MainScene::checkForCollision()
 {
     if (hasCollision()){
+
+        //Notify the UIController through the Main Window
         emit static_cast<MainWindow*>(this->parent())->processCollision();
+
+        //Let the bird fall down completely
+        bird->setPos(bird->pos().x(),sceneRect().bottom() - bird->geometry().height());
+
     }
 }

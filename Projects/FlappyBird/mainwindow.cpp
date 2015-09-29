@@ -43,7 +43,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 void MainWindow::createFlowers()
 {
     mainScene->createFlowers();
-    mainScene->update();
 }
 
 /*Reference to the function declaration*/
@@ -56,22 +55,18 @@ void MainWindow::play()
 void MainWindow::freeFallBird()
 {
     mainScene->freeFallBird();
-    mainScene->update();
 }
 
 /*Reference to the function declaration*/
 void MainWindow::flyUpBird()
 {
     mainScene->flyUpBird();
-    mainScene->update();
 }
 
 /*Reference to the function declaration*/
 void MainWindow::moveFlowers()
 {
     mainScene->moveFlowers();
-    //Make scene look smooth
-    mainScene->update();
 }
 
 
