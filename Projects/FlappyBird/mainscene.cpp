@@ -259,6 +259,6 @@ void MainScene::checkForCollision()
 
         //Let the bird fall down completely
         bird->setPos(bird->pos().x(),sceneRect().bottom() - bird->geometry().height());
-
+        update();
     }
 }
