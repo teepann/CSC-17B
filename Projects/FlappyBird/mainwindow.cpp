@@ -21,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
                             ,ui->graphicsView->geometry().height());
 
     ui->graphicsView->setScene(mainScene);
-
 }
 
 /*Reference to the function declaration*/
@@ -68,7 +67,5 @@ void MainWindow::moveFlowers()
 {
     mainScene->moveFlowers();
 }
-
-
 
 

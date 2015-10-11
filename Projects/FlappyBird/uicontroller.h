@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTimer>
 #include "mainwindow.h"
+#include "startmenu.h"
 
 /**
  * @brief The SceneController class
@@ -22,14 +23,17 @@ private:
     /*The maximum miliseconds for creating flowers*/
     const int MAX_TIME_IN_MIL = 5000;
 
-    /*The default miliseconds for moving flowers*/
-    const int FLOWER_DEFAULT_SPEED = 15;
+    /*The default (easy level) miliseconds for moving flowers*/
+    int flowerSpeed = 12;
 
-    /*The default miliseconds for the bird fall down*/
-    const int BIRD_FALLING_SPEED = 200;
+    /*The default (easy level) miliseconds for the bird fall down*/
+    int birdFallingSpeed = 170;
 
     /*The main window of Flappy Bird*/
     MainWindow *mainWindow;
+
+    /*The start menu*/
+    StartMenu *startMenu;
 
     /*This timer is used for controlling the creation of flowers*/
     QTimer *cFlowerTimer;
@@ -46,6 +50,9 @@ private:
 public:
     /*The constructor of this main UI controller*/
     explicit UIController(QObject *parent = 0);
+
+    /*Change speed for flower and bird based on difficultly level*/
+    void changeDifficulty(int, int);
 
 signals:
 

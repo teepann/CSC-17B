@@ -37,7 +37,7 @@ private:
     const short MAX_FLOWER_HEIGHT = 200;
 
     /*This scalar of the flapping bird in the scene*/
-    const float BIRD_PIC_SCALE = 0.2;
+    const float BIRD_PIC_SCALE = 0.1;
 
     /*The angle of the falling bird */
     const qreal FREE_FALL_ANGLE = 90;

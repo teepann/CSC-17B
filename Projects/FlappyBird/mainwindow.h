@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 #include "mainscene.h"
 
 namespace Ui {
@@ -26,7 +27,10 @@ private:
     Ui::MainWindow *ui;
 
     /*The fundamental graphics scene of the game*/
-    MainScene *mainScene;
+    MainScene *mainScene;    
+
+    /*Timer for pause function*/
+    QTimer *timer;
 
 protected:
 

@@ -30,7 +30,7 @@ MainScene::MainScene(QObject *parent) : QGraphicsScene(parent)
 
     /*At first the bird is not in either free-fall or fly-up mode*/
     isFreeFall = false;
-    isFlyUp = false;
+    isFlyUp = false;   
 }
 
 /**
@@ -90,7 +90,7 @@ void MainScene::createABird(const QSize& birdSize)
     QLabel *birdLabel = new QLabel();
 
     //Let the bird image occupy the whole scene at the beginning
-    birdMovie->setScaledSize(birdSize);
+    birdMovie->setScaledSize(birdSize);    
     birdLabel->setMovie(birdMovie);
 
     //Make the gif look transparent on the main scene

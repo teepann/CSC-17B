@@ -15,13 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     mainscene.cpp \
-    uicontroller.cpp
+    uicontroller.cpp \
+    startmenu.cpp
 
 HEADERS  += mainwindow.h \
     mainscene.h \
-    uicontroller.h
+    uicontroller.h \
+    startmenu.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    startmenu.ui
 
 RESOURCES += \
     images.qrc
